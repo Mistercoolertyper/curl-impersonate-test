@@ -55,7 +55,11 @@ popd
 
 :: Build & Install boringssl
 pushd "%deps%\boringssl"
-cmake %cmake_common_args% -DCMAKE_POSITION_INDEPENDENT_CODE=ON -S . -B "%build%\boringssl"
+if "%DISABLE_ASM_ARM64%"=="true" (
+  cmake %cmake_common_args% -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DOPENSSL_NO_ASM=ON -S . -B "%build%\boringssl"
+) else (
+  cmake %cmake_common_args% -DCMAKE_POSITION_INDEPENDENT_CODE=ON -S . -B "%build%\boringssl"
+)
 cmake --build "%build%\boringssl" --config %configuration% --target install
 popd
 
@@ -68,6 +72,12 @@ cmake %cmake_common_args% -DENABLE_SHARED_LIB=OFF -DENABLE_STATIC_LIB=ON -DENABL
   -DBORINGSSL_LIBRARIES:STRING="%packages:\=/%/lib/ssl.lib;%packages:\=/%/lib/crypto.lib"^
   -S . -B "%build%\ngtcp2"
 cmake --build "%build%\ngtcp2" --config %configuration% --target install
+popd
+
+:: Build & Install c-ares
+pushd "%deps%\c-ares"
+cmake %cmake_common_args% -DCARES_SHARED=OFF -DCARES_STATIC=ON -S . -B "%build%\c-ares"
+cmake --build "%build%\c-ares" --config %configuration% --target install
 popd
 
 
@@ -89,6 +99,7 @@ cmake %cmake_common_args% -DBUILD_SHARED_LIBS=ON^
   -DUSE_SSLS_EXPORT=ON^
   -DENABLE_IPV6=ON^
   -DENABLE_UNICODE=ON^
+  -DENABLE_ARES=ON^
   -DCURL_ENABLE_SSL=ON^
   -DCURL_USE_LIBSSH2=OFF^
   -DOPENSSL_ROOT_DIR="%packages%"^
