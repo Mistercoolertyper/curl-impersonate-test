@@ -1566,7 +1566,7 @@ new file mode 100644
 index 000000000..ada434366
 --- /dev/null
 +++ b/lib/impersonate.c
-@@ -0,0 +1,1864 @@
+@@ -0,0 +1,1862 @@
 +#include "curl_setup.h"
 +
 +#include <curl/curl.h>
@@ -3364,8 +3364,8 @@ index 000000000..ada434366
 +    .tls_key_shares_limit = 2,
 +  },
 +  {
-+    .target = "firefox140",
-+    .alias = "firefox140",
++    .target = "firefox141",
++    .alias = "firefox141",
 +    .httpversion = CURL_HTTP_VERSION_2_0,
 +    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
 +    .ciphers =
@@ -3419,12 +3419,10 @@ index 000000000..ada434366
 +    .http2_pseudo_headers_order = "mpas",
 +    .http2_stream_exclusive = 0,
 +    .cert_compression = "zlib,brotli,zstd",
-+    .ech = "grease",
 +    .tls_session_ticket = true,
 +    .tls_extension_order = "0-23-65281-10-11-35-16-5-34-18-51-43-13-45-28-27-65037",
 +    .tls_delegated_credentials = "ecdsa_secp256r1_sha256:ecdsa_secp384r1_sha384:ecdsa_secp521r1_sha512:ecdsa_sha1",
 +    .tls_record_size_limit = 16385,
-+    .tls_grease = true,
 +    .tls_signed_cert_timestamps = true,
 +    .tls_key_shares_limit = 3,
 +  },
