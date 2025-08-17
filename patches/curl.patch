@@ -1460,7 +1460,7 @@ index dd82aa963..736445dd5 100644
 + */
 +#define CHROME_DEFAULT_STREAM_WEIGHT    (256)
 +#define SAFARI_DEFAULT_STREAM_WEIGHT    (255)
-+#define FIREFOX_DEFAULT_STREAM_WEIGHT   (42)
++#define FIREFOX_DEFAULT_STREAM_WEIGHT   (0)
 +
  static int sweight_wanted(const struct Curl_easy *data)
  {
@@ -1566,7 +1566,7 @@ new file mode 100644
 index 000000000..ada434366
 --- /dev/null
 +++ b/lib/impersonate.c
-@@ -0,0 +1,1863 @@
+@@ -0,0 +1,1864 @@
 +#include "curl_setup.h"
 +
 +#include <curl/curl.h>
@@ -3418,6 +3418,7 @@ index 000000000..ada434366
 +    .http2_window_update = 12517377,
 +    .http2_pseudo_headers_order = "mpas",
 +    .http2_stream_exclusive = 0,
++    .http2_stream_weight = 42,
 +    .cert_compression = "zlib,brotli,zstd",
 +    .ech = "grease",
 +    .tls_session_ticket = true,
